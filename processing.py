@@ -16,21 +16,20 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import os
 import random
 from datetime import datetime
 import math
 import sklearn
+import kagglehub
 
-wd = os.getcwd()
 def set_seed(seed):
     random.seed(seed)
     np.random.seed(seed)
 set_seed(100)
 
-# ## Loading data
-
-data = pd.read_csv(r'{}\bank_marketing_dataset.csv'.format(wd))
+# Loading data
+path = kagglehub.dataset_download("berkayalan/bank-marketing-data-set")
+data = pd.read_csv(f"{path}/bank_marketing_dataset.csv")
 print(data.head())
 print(data.describe())
 print(data.dtypes)
