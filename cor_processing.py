@@ -59,16 +59,10 @@ df_encode = pd.get_dummies(df, columns=categorical_cols, drop_first=False)
 # -
 
 # Encode label
-label_encoder = LabelEncoder()
-label_encoder.fit(df_encode['subscribed'])
-df_encode['subscribed'] = label_encoder.transform(df_encode['subscribed'])
+# Convert 'subscribed' to binary (0 == No, 1 == Yes)
+df['subscribed'] = df['subscribed'].map({'no': 0, 'yes': 1})
 
-df_encode.dtypes
+# Convert 999 in pdays to NaN (Because 999 represents not contacted)
+df['pdays'] = df['pdays'].replace(999, np.nan)
 
-
-
-
-
-
-
-
+df_encode.to_csv('processed_data/cor_processing.csv', index=False)
