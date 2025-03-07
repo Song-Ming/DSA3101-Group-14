@@ -14,6 +14,9 @@ df = pd.read_csv(f"{path}/bank_marketing_dataset.csv")
 
 print("Dataset loaded successfully.")
 
+# Drop duration
+df = df.drop(['duration'],axis = 1)
+
 # Compute PPS matrix
 pps_matrix = ppscore.matrix(df)
 
