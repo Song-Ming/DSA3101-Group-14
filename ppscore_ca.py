@@ -1,33 +1,35 @@
+# ppscore_venv\Scripts\activate
+
+
 import numpy as np
 import pandas as pd
-import ppscore as pps
+import kagglehub
+import ppscore
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Load df
-df = pd.read_csv('processed_data/cor_processing.csv')
+# Load data without any modifications
+path = kagglehub.dataset_download("berkayalan/bank-marketing-data-set")
+df = pd.read_csv(f"{path}/bank_marketing_dataset.csv")
+
+print("Dataset loaded successfully.")
 
 # Compute PPS matrix
-pps_matrix = pps.matrix(df)
+pps_matrix = ppscore.matrix(df)
 
-# Round PPS values to 2 decimal places
-pps_matrix['ppscore'] = pps_matrix['ppscore'].round(2)
+# # Remove self-predicting values (x == y)
+# pps_matrix = pps_matrix[pps_matrix["x"] != pps_matrix["y"]]
 
-# Remove self-predicting rows (x == y)
-pps_matrix = pps_matrix[pps_matrix["x"] != pps_matrix["y"]]
+# # Filter out weak predictors (PPS > 0.1 for readability)
+# pps_matrix_filtered = pps_matrix[pps_matrix["ppscore"] > 0.1]
 
-# Filter out weak predictors (only keep ppscore > 0.1)
-pps_matrix_filtered = pps_matrix[pps_matrix["ppscore"] > 0.1]
+# Pivot the data for heatmap visualization
+pps_subscribed = pps_matrix[pps_matrix["y"] == "subscribed"]
+heatmap_data = pps_subscribed.pivot(index="y", columns="x", values="ppscore")
 
-# Save filtered PPS matrix to CSV
-pps_matrix_filtered.to_csv('processed_data/ppscore_matrix_filtered.csv', index=False)
-
-# Visualization: Heatmap of filtered PPS Matrix
-plt.figure(figsize=(12, 8))
-matrix_df = pps_matrix_filtered.pivot(columns='x', index='y', values='ppscore')
-
-sns.heatmap(matrix_df, vmin=0, vmax=1, cmap="Blues", linewidths=0.5, annot=True, fmt=".2f")
-plt.title("Filtered Predictive Power Score (PPS) Matrix (ppscore > 0.1)")
+plt.figure(figsize=(12, 6))
+sns.heatmap(heatmap_data, vmin=0, vmax=1, cmap="Blues", linewidths=0.5, annot=True, fmt=".2f")
+plt.title("PPS for Predicting Subscription (subscribed)")
+plt.xticks(rotation=90)
+plt.yticks(rotation=0)
 plt.show()
-
-print("Filtered PPS matrix has been saved to 'processed_data/ppscore_matrix_filtered.csv'")
