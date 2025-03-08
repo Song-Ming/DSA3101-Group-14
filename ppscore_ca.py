@@ -1,6 +1,3 @@
-# ppscore_venv\Scripts\activate
-
-
 import numpy as np
 import pandas as pd
 import kagglehub
@@ -17,17 +14,10 @@ print("Dataset loaded successfully.")
 # Drop duration
 df = df.drop(['duration'],axis = 1)
 
-# Compute PPS matrix
-pps_matrix = ppscore.matrix(df)
-
-# # Remove self-predicting values (x == y)
-# pps_matrix = pps_matrix[pps_matrix["x"] != pps_matrix["y"]]
-
-# # Filter out weak predictors (PPS > 0.1 for readability)
-# pps_matrix_filtered = pps_matrix[pps_matrix["ppscore"] > 0.1]
+# Compute PPS (note: unknown is treated as a third value)
+pps_subscribed = ppscore.predictors(df,'subscribed',random_seed = 100, invalid_score = 1000)
 
 # Pivot the data for heatmap visualization
-pps_subscribed = pps_matrix[pps_matrix["y"] == "subscribed"]
 heatmap_data = pps_subscribed.pivot(index="y", columns="x", values="ppscore")
 
 plt.figure(figsize=(12, 6))
@@ -36,3 +26,5 @@ plt.title("PPS for Predicting Subscription (subscribed)")
 plt.xticks(rotation=90)
 plt.yticks(rotation=0)
 plt.show()
+
+
