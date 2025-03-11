@@ -11,9 +11,6 @@ df = pd.read_csv(f"{path}/bank_marketing_dataset.csv")
 
 print("Dataset loaded successfully.")
 
-# Drop duration
-df = df.drop(['duration'],axis = 1)
-
 # Compute PPS (note: unknown is treated as a third value)
 pps_subscribed = ppscore.predictors(df,'subscribed',random_seed = 100, invalid_score = 1000)
 
@@ -26,5 +23,6 @@ plt.title("PPS for Predicting Subscription (subscribed)")
 plt.xticks(rotation=90)
 plt.yticks(rotation=0)
 plt.show()
+
 
 
