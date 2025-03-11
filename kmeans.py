@@ -121,4 +121,4 @@ plt.show()
 
 #Cluster 0: Diverse job types. Moderate subscription to term deposits. Contacted less frequently, and response rate is low.
 #Cluster 1: Diverse job types with more high paying jobs. Lowest subsciption to term deposits. Most were never contacted for previous marketing campaigns.
-#Cluster 2: Relatively higher proportion of retired individuals and students, higher subscription to term deposits. Contacted recently and response to marketing campaign is high
+#Cluster 2: Relatively higher proportion of retired individuals and students, more subscription to term deposits. Contacted recently and response to marketing campaign is high
