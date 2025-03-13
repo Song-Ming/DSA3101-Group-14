@@ -1,3 +1,7 @@
+# ppscore library information:
+# For pandas>2.0.0, scikit-learn>2.0.0
+# You need to set up a venv to import ppscore
+
 import numpy as np
 import pandas as pd
 import kagglehub
