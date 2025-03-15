@@ -17,3 +17,7 @@ print('Conversion rate is {}%'.format(conversion*100))
 prev_campaign = df['poutcome'].value_counts()
 prev_success = prev_campaign['success'] / (prev_campaign['failure'] + prev_campaign['success'])
 print('Previous campaign success rate is {}%'.format(prev_success*100))
+
+
+#Conversion rate is 9.408514379002888%
+#Previous campaign success rate is 24.40888888888889%

@@ -13,3 +13,5 @@ previous_success_df = df[df['poutcome'] == 'success']
 retention_rate = (previous_success_df['subscribed'] == 'yes').sum() / previous_success_df.shape[0] * 100
 
 print('Retention rate is {}%'.format(retention_rate))
+
+#Retention rate is 65.1128914785142%
