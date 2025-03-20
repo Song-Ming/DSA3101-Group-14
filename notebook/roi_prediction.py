@@ -55,7 +55,7 @@ def calculate_customer_roi(row):
         call_cost = row['duration'] * cps_cell
     else:  # Telephone call
         call_cost = row['duration'] * cps_tele
-
+    
     # Calculate total cost for the customer
     total_cost = call_cost * row['campaign']  # Multiply by the number of calls made to the customer
     
@@ -75,7 +75,7 @@ def calculate_customer_roi(row):
 ## Apply the functions to each customer
 df['roi'] = df.apply(calculate_customer_roi, axis=1)
 
-# Encode categoricla variables
+# Encode categorical variables
 categorical_features = ['job', 'marital', 'education', 'month', 'day_of_week', 'pdays_bins', 'previous_bins']
 encoder = OneHotEncoder(drop='first', sparse_output=False)
 categorical_encoded = encoder.fit_transform(df[categorical_features])
