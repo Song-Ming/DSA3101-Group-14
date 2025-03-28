@@ -13,25 +13,25 @@ binary_features = ['housing', 'loan', 'subscribed']
 for col in binary_features:
     df[col] = df[col].map({'no': 0, 'yes': 1})
 
-## Convert poutcome to ordinal values
+## Convert contact type to binary
+df['contact'] = df['contact'].map({'telephone': 0, 'cellular': 1})
+
+## Convert to ordinal values
 poutcome_mapping = {'failure': 0, 'nonexistent': 1, 'success': 2}
 df['poutcome'] = df['poutcome'].map(poutcome_mapping)
 
-## Convert default to ordinal values
 default_mapping = {'no': 0, 'unknown': 1, 'yes': 2}
 df['default'] = df['default'].map(default_mapping)
-
-## Convert contact type to binary
-df['contact'] = df['contact'].map({'telephone': 0, 'cellular': 1})
 
 ## Bin pdays and previous
 df['pdays_bins'] = df['pdays'].apply(lambda x: 'Never Contacted' if x == 999 else ('1-5' if x <= 5 else '6+'))
 df['previous_bins'] = pd.cut(df['previous'], bins=[-1, 0, 1, float('inf')], labels=['Never', '1', '2+'])
 
 ## Drop unnecessary columns
-df = df.drop(columns=['pdays', 'previous'])
+df = df.drop(columns=['pdays', 'previous', 'emp.var.rate','cons.price.idx','cons.conf.idx','euribor3m','nr.employed'])
 
 # Calculate ROI
+## (Take conversion rate/previous campaign success rate into account)
 ## Calculate conversion rate among those who did not subscribe in previous campaign
 success_df = df[df['poutcome'] != 2]
 conversion_rate = sum(success_df['subscribed'] == 1) / success_df.shape[0]
@@ -73,8 +73,8 @@ df['clv'] = df.apply(calculate_clv, axis=1)
 ## Function to calculate customer acquisition cost
 def calculate_acquisition_cost(row):
     if row['campaign'] == 0 or row['duration'] == 0:
-        return 0.01  # minimum acquisition cost to avoid div by 0
-    cps = 0.05 if row['contact'] == 1 else 0.03
+        return 0.01  # minimum acquisition cost to avoid division by 0
+    cps = 0.05 if row['contact'] == 1 else 0.03 # cost per second
     return row['campaign'] * row['duration'] * cps
 
 df['acquisition_cost'] = df.apply(calculate_acquisition_cost, axis=1)
