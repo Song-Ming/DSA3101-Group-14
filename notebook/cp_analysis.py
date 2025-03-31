@@ -1,11 +1,15 @@
-import numpy as np
 import pandas as pd
-import random
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.preprocessing import OneHotEncoder
+from sklearn.cluster import KMeans
+from sklearn.decomposition import PCA
 from sklearn.impute import SimpleImputer
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report, confusion_matrix
+from sklearn import tree
+import matplotlib.pyplot as plt
+import random
+import numpy as np
 
 # Set seed
 def set_seed(seed):
@@ -91,6 +95,8 @@ df['acquisition_cost'] = df.apply(calculate_acquisition_cost, axis=1)
 # Calculate ROI
 df['roi'] = ((df['clv'] - df['acquisition_cost']) / df['acquisition_cost']) * 100
 
+df_unscaledcopy = df.copy()
+
 # Encode categorical variables
 categorical_features = ['job', 'marital', 'education', 'month', 'day_of_week', 'pdays_bins', 'previous_bins']
 encoder = OneHotEncoder(drop='first', sparse_output=False)
@@ -105,25 +111,76 @@ df = pd.concat([df, categorical_df], axis=1)
 imputer = SimpleImputer(strategy='most_frequent')
 df = pd.DataFrame(imputer.fit_transform(df), columns=df.columns)
 
-# Split and scale data
-## Define features and target
-X = df.drop(columns=['roi'])
-y = df['roi']
+wcss = []
+K_range = range(2, 11)
 
-## Split data
+for k in K_range:
+    kmeans = KMeans(n_clusters=k, random_state=42, n_init=10)
+    kmeans.fit(df)
+    wcss.append(kmeans.inertia_)
+
+# Apply KMeans clustering with k=3
+k = 3
+kmeans = KMeans(n_clusters=k, random_state=42, n_init=10)
+df['cluster'] = kmeans.fit_predict(df)
+df_unscaledcopy['cluster'] = df['cluster'] ##for visualisation of clusters
+
+# Perform PCA to reduce the data to 2 components for visualisation
+pca = PCA(n_components=2)
+reduced_data = pca.fit_transform(df.drop(columns=['cluster']))
+
+# Analyse clusters
+cluster_summary = df_unscaledcopy.groupby('cluster').agg({
+    'roi': ['mean', 'median'],
+    'clv': ['mean', 'median'],
+    'acquisition_cost': ['mean', 'median'],
+    'subscribed': 'mean',
+}).round(2)
+
+print(cluster_summary)
+
+categorical_cols = ['job', 'education', 'marital']
+
+for col in categorical_cols:
+    print(f"\n{col.upper()} DISTRIBUTION BY CLUSTER")
+    print(df_unscaledcopy.groupby('cluster')[col].value_counts(normalize=True).unstack().round(2))
+
+roi_quartiles = df_unscaledcopy['roi'].quantile([0.25, 0.5, 0.75])
+print(roi_quartiles)
+
+# Step 1: Define the ROI segments
+roi_quartiles = df['roi'].quantile([0.25, 0.5, 0.75])
+
+# Create a new column for ROI segments based on quartiles
+def classify_roi(row):
+    if row['roi'] < roi_quartiles[0.25]:
+        return 'Low ROI'
+    elif row['roi'] < roi_quartiles[0.75]:
+        return 'Medium ROI'
+    else:
+        return 'High ROI'
+
+df['roi_segment'] = df.apply(classify_roi, axis=1)
+
+# Select features and target variable
+X = df.drop(columns=['roi', 'roi_segment', 'cluster'])  # Drop ROI, roi_segment, and cluster columns
+y = df['roi_segment']  # Target variable is the ROI segment
+
+# Split the data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
-# Train model using Random Forest
-model = RandomForestRegressor(random_state=42)
-model.fit(X_train, y_train)
+# Train a decision tree classifier
+clf = DecisionTreeClassifier(random_state=42)
+clf.fit(X_train, y_train)
 
-## Predict and evaluate
-y_pred = model.predict(X_test)
-print("MAE:", mean_absolute_error(y_test, y_pred))
-print("RMSE:", np.sqrt(mean_squared_error(y_test, y_pred)))
-print("R2 Score:", r2_score(y_test, y_pred))
+# Make predictions on the test set
+y_pred = clf.predict(X_test)
 
-## Feature importance
-feature_importances = pd.Series(model.feature_importances_, index=df.drop(columns=['roi']).columns)
-print("Feature Importances:")
-print(feature_importances.sort_values(ascending=False))
+# Evaluate the model
+print("Classification Report:\n", classification_report(y_test, y_pred))
+print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
+
+# Visualize the decision tree
+plt.figure(figsize=(15, 10))
+tree.plot_tree(clf, filled=True, feature_names=X.columns, class_names=['Low ROI', 'Medium ROI', 'High ROI'], rounded=True)
+plt.show()
