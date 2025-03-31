@@ -20,6 +20,7 @@ set_seed(42)
 # Load data
 df = pd.read_csv('../data/raw_data/bank_marketing_dataset.csv')
 
+#### Use ROI code from Q8 ######
 # Pre-processing
 ## Convert binary categorical variables to numeric
 binary_features = ['housing', 'loan', 'subscribed']
@@ -111,6 +112,7 @@ df = pd.concat([df, categorical_df], axis=1)
 imputer = SimpleImputer(strategy='most_frequent')
 df = pd.DataFrame(imputer.fit_transform(df), columns=df.columns)
 
+#### Use Clustering code from Q1 ######
 wcss = []
 K_range = range(2, 11)
 
@@ -148,7 +150,7 @@ for col in categorical_cols:
 roi_quartiles = df_unscaledcopy['roi'].quantile([0.25, 0.5, 0.75])
 print(roi_quartiles)
 
-# Step 1: Define the ROI segments
+# Define the ROI segments
 roi_quartiles = df['roi'].quantile([0.25, 0.5, 0.75])
 
 # Create a new column for ROI segments based on quartiles
