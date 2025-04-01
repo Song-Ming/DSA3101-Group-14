@@ -1,6 +1,5 @@
 import numpy as np
 import pandas as pd
-import kagglehub
 
 # Load data without any modifications
 df = pd.read_csv('./data/raw_data/bank_marketing_dataset.csv')
