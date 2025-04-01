@@ -22,6 +22,8 @@ Computation of conversion rate and retention rate from dataset.
 
 **roi prediction:**
 Computation and prediction of ROI using CLV and Customer Acquisition Costs.
+- CLV is determined by several customer demographics, such as education level, job type, marital and default status.
+- Acquisition costs are determined by the mode of contact, the number of times the customer is contacted and the duration of the calls.
 
 **customer segmentation:**
 1. Identification of distinct customer groups such as high-value clients, occasional users and budget-conscious customers.
