@@ -20,8 +20,14 @@ Correlation analysis of variables in the dataset with customer engagement (subsc
 **impact analysis:**
 Computation of conversion rate and retention rate from dataset.
 
-**roi prediction**
+**roi prediction:**
 Computation and prediction of ROI using CLV and Customer Acquisition Costs.
+
+**customer segmentation:**
+1. Identification of distinct customer groups such as high-value clients, occasional users and budget-conscious customers.
+2. Analyze customer behaviors across different segments and leverage insights to recommend targeted marketing approaches.
+3. Explore the possibility of implementing a real-time segmentation
+model.
 
 ## Python Libraries and Versions
 The project was built using the following Python libraries:
