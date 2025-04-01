@@ -7,8 +7,6 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot  as plt
 import seaborn as sns
-from joblib import dump
-import os
 
 def preprocess_data():
     df = pd.read_csv('./data/raw_data/bank_marketing_dataset.csv')
@@ -79,9 +77,7 @@ def train_model():
     plt.title("Confusion Matrix - Logistic Regression (Test)")
     plt.xlabel("Predicted")
     plt.ylabel("Actual")
-    ## To save figure
-    os.makedirs('visualizations', exist_ok=True)
-    plt.savefig('visualizations/test_cm.png')
+    plt.show()
 
     # ROC AUC
     y_pred_proba = best_model.predict_proba(X_test_scaled)[:, 1]
@@ -98,8 +94,7 @@ def train_model():
     plt.ylabel("True Positive Rate")
     plt.title("ROC AUC Curve - Logistic Regression")
     plt.legend(loc="lower right")
-    ## Save fig
-    plt.savefig('visualizations/roc_auc.png')
+    plt.show()
 
     # Feature importance plot (for Logistic Regression, we'll use the absolute values of coefficients)
     importances = np.abs(best_model.coef_[0])
@@ -109,16 +104,7 @@ def train_model():
     plt.bar(range(len(importances)), importances[indices])
     plt.xticks(range(len(importances)), [X.columns[i] for i in indices], rotation=90)
     plt.tight_layout()
-    ## Save fig
-    plt.savefig('visualizations/feature_importance.png')
-    
-    # Make dir for models
-    os.makedirs('models', exist_ok=True)
-    # Save model
-    dump(best_model, 'models/churn_model.joblib')
-    dump(scaler, 'models/scaler.joblib')
-    dump(encoder, 'models/encoder.joblib')
-
+    plt.show()
 
 if __name__ == '__main__':
     train_model()
