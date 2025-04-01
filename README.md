@@ -20,6 +20,9 @@ Correlation analysis of variables in the dataset with customer engagement (subsc
 **impact analysis:**
 Computation of conversion rate and retention rate from dataset.
 
+**roi prediction**
+Computation and prediction of ROI using CLV and Customer Acquisition Costs.
+
 ## Python Libraries and Versions
 The project was built using the following Python libraries:
 
@@ -28,6 +31,6 @@ The project was built using the following Python libraries:
 | numpy        | 1.26.4  |
 | pandas       | 1.5.3   |
 | ppscore      | 1.3.0   |
-|              |         |
+| sklearn      | 1.4.2   |
 
 
