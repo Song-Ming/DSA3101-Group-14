@@ -13,4 +13,7 @@ The objective is to develop an AI-driven system to create personalised marketing
 The project was built using the following Python libraries:
 
 | Library      | Version |
-|--------------|---------|
+|numpy|1.26.4|
+|pandas|1.5.3|
+|ppscore|1.3.0|
+
