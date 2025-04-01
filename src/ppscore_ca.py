@@ -1,13 +1,11 @@
 import numpy as np
 import pandas as pd
-import kagglehub
 import ppscore
 import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Load data without any modifications
-path = kagglehub.dataset_download("berkayalan/bank-marketing-data-set")
-df = pd.read_csv(f"{path}/bank_marketing_dataset.csv")
+df = pd.read_csv('./data/raw_data/bank_marketing_dataset.csv')
 
 print("Dataset loaded successfully.")
 
