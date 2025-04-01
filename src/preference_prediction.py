@@ -10,9 +10,8 @@ import matplotlib.pyplot as plt
 from sklearn.tree import plot_tree
 import kagglehub
 
-# path = kagglehub.dataset_download("berkayalan/bank-marketing-data-set")
-# df = pd.read_csv(f"{path}/bank_marketing_dataset.csv")
-df = pd.read_csv("../data/raw_data/bank_marketing_dataset.csv")
+
+df = pd.read_csv('./data/raw_data/bank_marketing_dataset.csv')
 df = df.drop(['emp.var.rate','cons.price.idx','cons.conf.idx','euribor3m','nr.employed','duration','campaign','previous','subscribed', 'pdays', 'default'], axis=1)
 
 df["combined_education"] = df["education"].apply(lambda x: "basic" if x in set({"basic.4y", "basic.6y", "basic.9y"}) else x)

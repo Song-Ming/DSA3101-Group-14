@@ -11,7 +11,7 @@ from joblib import dump
 import os
 
 def preprocess_data():
-    df = pd.read_csv('data/raw_data/bank_marketing_dataset.csv')
+    df = pd.read_csv('./data/raw_data/bank_marketing_dataset.csv')
     # No missing values
 
     # Standardize naming
