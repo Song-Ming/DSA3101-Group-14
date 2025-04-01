@@ -31,6 +31,10 @@ Computation and prediction of ROI using CLV and Customer Acquisition Costs.
 3. Explore the possibility of implementing a real-time segmentation
 model.
 
+**churn model training:**
+Implementation and optimization of a logistic regression model to predict customer churn.
+- A customer is classified as churned if poutcome = failure & subscribed = no.
+
 ## Python Libraries and Versions
 The project was built using the following Python libraries:
 
