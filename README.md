@@ -20,6 +20,9 @@ Set the working directory to the project folder.
 Implementation and optimization of a logistic regression model to predict customer churn.
 - A customer is classified as churned if poutcome = failure & subscribed = no.
 
+**cost personalization analysis**
+Classify customers into different ROI segments to identify the most optimal marketing campaign strategy.
+
 **customer segmentation:**
 Identification of distinct customer groups such as high-value clients, occasional users and budget-conscious customers.
 - Analyze customer behaviors across different segments and leverage insights to recommend targeted marketing approaches.
