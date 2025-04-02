@@ -9,8 +9,8 @@ The objective is to develop an AI-driven system to create personalised marketing
 **Dataset Source:**  
 [Bank Marketing Dataset on Kaggle](https://www.kaggle.com/datasets/berkayalan/bank-marketing-data-set/data)
 
-## Data
-Run get_data.py to download the dataset from kaggle.
+## Extract dataset
+Run get_data.py to download the dataset from Kaggle.
 
 ## src
 
@@ -26,10 +26,13 @@ Computation and prediction of ROI using CLV and Customer Acquisition Costs.
 - Acquisition costs are determined by the mode of contact, the number of times the customer is contacted and the duration of the calls.
 
 **customer segmentation:**
-- Identification of distinct customer groups such as high-value clients, occasional users and budget-conscious customers.
+Identification of distinct customer groups such as high-value clients, occasional users and budget-conscious customers.
 - Analyze customer behaviors across different segments and leverage insights to recommend targeted marketing approaches.
 - Explore the possibility of implementing a real-time segmentation
 model.
+
+**optimise campaign:** 
+Implementation of algorithm to dynamically campaign parameters according to month, day of week and contact mode (telephone/cellular) based on past campaign performance. Additionally, applied clustered data according to key economic indicators ("emp.var.rate", "euribor3m", "nr.employed", "cons.price.idx", "cons.conf.idx") to uncover patterns in financial behavior. This helps determine whether housing loans, personal loans, credit customers, and term deposit subscriptions were more prevalent within each clusters.
 
 **churn model training:**
 Implementation and optimization of a logistic regression model to predict customer churn.
