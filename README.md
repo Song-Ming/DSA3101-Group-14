@@ -20,14 +20,14 @@ Set the working directory to the project folder.
 Implementation and optimization of a logistic regression model to predict customer churn.
 - A customer is classified as churned if poutcome = failure & subscribed = no.
 
-**impact analysis:**
-Computation of conversion rate and retention rate from dataset.
-
 **customer segmentation:**
 Identification of distinct customer groups such as high-value clients, occasional users and budget-conscious customers.
 - Analyze customer behaviors across different segments and leverage insights to recommend targeted marketing approaches.
 - Explore the possibility of implementing a real-time segmentation
 model.
+
+**impact analysis:**
+Computation of conversion rate and retention rate from dataset.
 
 **optimise campaign:** 
 Implementation of algorithm to dynamically campaign parameters according to month, day of week and contact mode (telephone/cellular) based on past campaign performance. Additionally, applied clustered data according to key economic indicators ("emp.var.rate", "euribor3m", "nr.employed", "cons.price.idx", "cons.conf.idx") to uncover patterns in financial behavior. This helps determine whether housing loans, personal loans, credit customers, and term deposit subscriptions were more prevalent within each clusters.
@@ -35,7 +35,7 @@ Implementation of algorithm to dynamically campaign parameters according to mont
 **ppscore:**
 Correlation analysis of variables in the dataset with customer engagement (subscribed) using predictive power score.
 
-**customer preference prediction:**
+**preference prediction:**
 Implementation of a random forest model to predict whether the customer will take a housing or personal loan.
 - Predict customers' preference through customer demographics and campaign data.
 - Use SMOTE to handle imbalanced data and use grid search for hyperparameter tuning.
