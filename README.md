@@ -15,7 +15,7 @@ Run get_data.py to download the dataset from kaggle.
 ## src
 
 **ppscore:**
-Correlation analysis of variables in the dataset with customer engagement (subscribed).
+Correlation analysis of variables in the dataset with customer engagement (subscribed) using predictive power score.
 
 **impact analysis:**
 Computation of conversion rate and retention rate from dataset.
