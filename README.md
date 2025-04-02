@@ -35,6 +35,11 @@ model.
 Implementation and optimization of a logistic regression model to predict customer churn.
 - A customer is classified as churned if poutcome = failure & subscribed = no.
 
+**customer preference prediction:**
+Implementation of a random forest model to predict whether the customer will take a housing or personal loan.
+- Predict customers' preference through customer demographics and campaign data.
+- Use SMOTE to handle imbalanced data and use grid search for hyperparameter tuning.
+
 ## Python Libraries and Versions
 The project was built using the following Python libraries:
 
