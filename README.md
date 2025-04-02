@@ -26,9 +26,9 @@ Computation and prediction of ROI using CLV and Customer Acquisition Costs.
 - Acquisition costs are determined by the mode of contact, the number of times the customer is contacted and the duration of the calls.
 
 **customer segmentation:**
-1. Identification of distinct customer groups such as high-value clients, occasional users and budget-conscious customers.
-2. Analyze customer behaviors across different segments and leverage insights to recommend targeted marketing approaches.
-3. Explore the possibility of implementing a real-time segmentation
+- Identification of distinct customer groups such as high-value clients, occasional users and budget-conscious customers.
+- Analyze customer behaviors across different segments and leverage insights to recommend targeted marketing approaches.
+- Explore the possibility of implementing a real-time segmentation
 model.
 
 **churn model training:**
