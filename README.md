@@ -30,7 +30,9 @@ model.
 Computation of conversion rate and retention rate from dataset.
 
 **optimise campaign:** 
-Implementation of algorithm to dynamically campaign parameters according to month, day of week and contact mode (telephone/cellular) based on past campaign performance. Additionally, applied clustered data according to key economic indicators ("emp.var.rate", "euribor3m", "nr.employed", "cons.price.idx", "cons.conf.idx") to uncover patterns in financial behavior. This helps determine whether housing loans, personal loans, credit customers, and term deposit subscriptions were more prevalent within each clusters.
+Implementation of algorithm to dynamically campaign parameters according to month, day of week and contact mode (telephone/cellular) based on past campaign performance. 
+- Applied clustered data according to key economic indicators ("emp.var.rate", "euribor3m", etc) to uncover patterns in financial behavior. 
+- Helps determine whether housing loans, personal loans, credit customers, and term deposit subscriptions were more prevalent within each clusters.
 
 **ppscore:**
 Correlation analysis of variables in the dataset with customer engagement (subscribed) using predictive power score.
