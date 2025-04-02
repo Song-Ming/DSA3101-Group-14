@@ -41,6 +41,7 @@ precision = precision_score(y_test, housing_pred)
 recall = recall_score(y_test, housing_pred)
 f1 = f1_score(y_test, housing_pred)
 
+print("Housing Loan:")
 print(f"Precision: {precision:.2f}")
 print(f"Recall: {recall:.2f}")
 print(f"F1_score: {f1:.2f}")
@@ -65,6 +66,7 @@ precision = precision_score(y_test, housing_pred)
 recall = recall_score(y_test, housing_pred)
 f1 = f1_score(y_test, housing_pred)
 
+print("Housing Loan(trained on the most important features):")
 print(f"Precision: {precision:.2f}")
 print(f"Recall: {recall:.2f}")
 print(f"F1_score: {f1:.2f}")
@@ -99,6 +101,7 @@ loan_pred = dt_model.predict(X_test)
 f1 = classification_report(y_test, loan_pred, output_dict=True)['weighted avg']['f1-score']
 micro_f1 = f1_score(y_test, loan_pred, average='micro')
 
+print("Personal Loan:")
 print(f"Micro F1-Score: {micro_f1:.4f}")
 print(f"F1_score: {f1:.2f}")
 print('Decision Tree accuracy for training set: %f' % dt_model.score(X_train, y_train))
@@ -122,6 +125,7 @@ loan_pred = dt_model.predict(X_test_l)
 f1 = classification_report(y_test, loan_pred, output_dict=True)['weighted avg']['f1-score']
 micro_f1 = f1_score(y_test, loan_pred, average='micro')
 
+print("Personal Loan(trained on the most important features):")
 print(f"Micro F1-Score: {micro_f1:.4f}")
 print(f"F1_score: {f1:.2f}")
 
