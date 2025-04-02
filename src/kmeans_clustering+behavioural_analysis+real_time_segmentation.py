@@ -19,7 +19,7 @@ import joblib  # To save the encoder
 # Set random seed for reproducibility
 np.random.seed(100)
 
-df = pd.read_csv('../data/raw_data/bank_marketing_dataset.csv')
+df = pd.read_csv('./data/raw_data/bank_marketing_dataset.csv')
 
 # Replace 'unknown' entries with NaN to handle missing values
 df = df.replace('unknown', pd.NA)
