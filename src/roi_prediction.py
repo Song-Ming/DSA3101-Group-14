@@ -14,7 +14,7 @@ def set_seed(seed):
 set_seed(42)
 
 # Load data
-df = pd.read_csv('../data/raw_data/bank_marketing_dataset.csv')
+df = pd.read_csv('./data/raw_data/bank_marketing_dataset.csv')
 
 # Pre-processing
 ## Convert binary categorical variables to numeric

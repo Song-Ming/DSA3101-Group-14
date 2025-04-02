@@ -12,18 +12,12 @@ The objective is to develop an AI-driven system to create personalised marketing
 ## Extract dataset
 Run get_data.py to download the dataset from Kaggle.
 
+Set the working directory to the project folder.
+
 ## src
 
 **ppscore:**
 Correlation analysis of variables in the dataset with customer engagement (subscribed) using predictive power score.
-
-**impact analysis:**
-Computation of conversion rate and retention rate from dataset.
-
-**roi prediction:**
-Computation and prediction of ROI using CLV and Customer Acquisition Costs.
-- CLV is determined by several customer demographics, such as education level, job type, marital and default status.
-- Acquisition costs are determined by the mode of contact, the number of times the customer is contacted and the duration of the calls.
 
 **customer segmentation:**
 Identification of distinct customer groups such as high-value clients, occasional users and budget-conscious customers.
@@ -31,17 +25,25 @@ Identification of distinct customer groups such as high-value clients, occasiona
 - Explore the possibility of implementing a real-time segmentation
 model.
 
-**optimise campaign:** 
-Implementation of algorithm to dynamically campaign parameters according to month, day of week and contact mode (telephone/cellular) based on past campaign performance. Additionally, applied clustered data according to key economic indicators ("emp.var.rate", "euribor3m", "nr.employed", "cons.price.idx", "cons.conf.idx") to uncover patterns in financial behavior. This helps determine whether housing loans, personal loans, credit customers, and term deposit subscriptions were more prevalent within each clusters.
-
-**churn model training:**
-Implementation and optimization of a logistic regression model to predict customer churn.
-- A customer is classified as churned if poutcome = failure & subscribed = no.
-
 **customer preference prediction:**
 Implementation of a random forest model to predict whether the customer will take a housing or personal loan.
 - Predict customers' preference through customer demographics and campaign data.
 - Use SMOTE to handle imbalanced data and use grid search for hyperparameter tuning.
+
+**optimise campaign:** 
+Implementation of algorithm to dynamically campaign parameters according to month, day of week and contact mode (telephone/cellular) based on past campaign performance. Additionally, applied clustered data according to key economic indicators ("emp.var.rate", "euribor3m", "nr.employed", "cons.price.idx", "cons.conf.idx") to uncover patterns in financial behavior. This helps determine whether housing loans, personal loans, credit customers, and term deposit subscriptions were more prevalent within each clusters.
+
+**roi prediction:**
+Computation and prediction of ROI using CLV and Customer Acquisition Costs.
+- CLV is determined by several customer demographics, such as education level, job type, marital and default status.
+- Acquisition costs are determined by the mode of contact, the number of times the customer is contacted and the duration of the calls.
+
+**impact analysis:**
+Computation of conversion rate and retention rate from dataset.
+
+**churn model training:**
+Implementation and optimization of a logistic regression model to predict customer churn.
+- A customer is classified as churned if poutcome = failure & subscribed = no.
 
 ## Python Libraries and Versions
 The project was built using the following Python libraries:
