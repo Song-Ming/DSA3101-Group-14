@@ -4,7 +4,7 @@ from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 from sklearn.impute import SimpleImputer
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.metrics import classification_report, confusion_matrix
 from sklearn import tree
 import matplotlib.pyplot as plt
@@ -171,12 +171,32 @@ y = df['roi_segment']  # Target variable is the ROI segment
 # Split the data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
+# Determine the best max_depth for the decision tree classifier
+accuracy_scores = []
+depths = list(range(3,21))
+for depth in depths:
+    model = DecisionTreeClassifier(max_depth=depth, random_state=42)
+    scores = cross_val_score(model, X, y, cv=5, scoring='accuracy')
+    print(f"Depth {depth}: Mean Accuracy = {scores.mean()}")
+    accuracy_scores.append(scores.mean())
+best_depth = depths[accuracy_scores.index(max(accuracy_scores))]
+
+# Plot accuracy vs depth
+plt.figure(figsize=(10, 6))
+plt.plot(depths, accuracy_scores, marker='o', linestyle='-', color='red')
+plt.title("Cross validated mean accuracy vs regression tree depth")
+plt.xlabel("Classification tree depth")
+plt.ylabel("Mean Accuracy")
+plt.grid(True)
+plt.tight_layout()
+plt.show()
+
 # Train a decision tree classifier
-clf = DecisionTreeClassifier(random_state=42)
-clf.fit(X_train, y_train)
+dtc = DecisionTreeClassifier(max_depth=best_depth, random_state=42)
+dtc.fit(X_train, y_train)
 
 # Make predictions on the test set
-y_pred = clf.predict(X_test)
+y_pred = dtc.predict(X_test)
 
 # Evaluate the model
 print("Classification Report:\n", classification_report(y_test, y_pred))
@@ -184,5 +204,5 @@ print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
 
 # Visualize the decision tree
 plt.figure(figsize=(15, 10))
-tree.plot_tree(clf, filled=True, feature_names=X.columns, class_names=['Low ROI', 'Medium ROI', 'High ROI'], rounded=True)
+tree.plot_tree(dtc, filled=True, feature_names=X.columns, class_names=['Low ROI', 'Medium ROI', 'High ROI'], rounded=True)
 plt.show()
